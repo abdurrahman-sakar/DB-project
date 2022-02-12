@@ -1,0 +1,416 @@
+﻿@using KesginKuaforUI.Models;
+@model CatAndProductList
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = null;
+
+    List<CategoryList> categoryLists = Model.categoryLists;
+    List<ProductList> productLists = Model.productLists;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+    <diV class="container" style="margin-top:200px;">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>KESGİN KUAFÖR</h1>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTransaction">
+                    Add Transaction
+                </button>
+            </div>
+        </div>
+    </diV>
+    <div class="container" style="margin-top:200px;">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Products</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#ID</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Type</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var product in productLists)
+                        {
+                            <tr>
+                                <td>@product.productID</td>
+                                <td>@product.productName</td>
+                                <td>@product.productType</td>
+                                <td>@product.price</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <h1>Category</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#ID</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var category in categoryLists)
+                        {
+                            <tr>
+                                <td>@category.categoryID</td>
+                                <td>@category.categoryName</td>
+                                <td>@category.price</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <!-- Modal -->
+
+
+    <div class="modal fade" id="getReceiptCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Receipt Result</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="categoryForm" method="post">
+                        <div class="form-group">
+                            <label for="inputEmail4">Receipt Number: </label>
+                            <b><span id="receiptNumber">14566</span></b>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Receipt Date: </label>
+                            <b><span id="receiptDate">14566</span></b>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Fullname: </label>
+                            <b><span id="receiptName">14566</span></b>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Total Price: </label>
+                            <b><span id="receiptPrice">14566</span></b>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="getReceiptProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Receipt Result</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm" method="post">
+                        <div class="form-group">
+                            <label for="inputEmail4">Receipt Number: </label>
+                            <b><span id="receiptProductNumber">14566</span></b>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Receipt Date: </label>
+                            <b><span id="receiptProductDate">14566</span></b>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Fullname: </label>
+                            <b><span id="receiptProductName">14566</span></b>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Total Price: </label>
+                            <b><span id="receiptProductPrice">14566</span></b>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addMakeRezarvationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCategoryForm" method="post">
+                        <div class="form-group">
+                            <select name="selectedCategory" class="form-control">
+                                <option selected>Select Category</option>
+                                @foreach (var item in Model.categoryLists)
+                                {
+                                    <option value="@item.categoryID">@item.categoryName</option>
+
+                                }
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="getReceiptCategory" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#getReceiptCategoryModal">Get Receipt</button>
+                    <button type="button" id="addIncrementCategory" class="btn btn-primary">Add Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addBuyModalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm" method="post">
+                        <div class="form-group">
+                            <select name="selectedProduct" class="form-control">
+                                <option selected>Select Product</option>
+                                @foreach (var item in Model.productLists)
+                                {
+                                    <option value="@item.productID">@item.productName</option>
+
+                                }
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="getReceiptProduct" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#getReceiptProductModal">Get Receipt</button>
+                    <button type="button" id="addIncrementProduct" class="btn btn-primary">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Transaction</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="transactionForm" method="post">
+
+                        <div class="form-group">
+                            <label for="inputEmail4" id="custName">Customer Name</label>
+                            <input type="text" class="form-control" id="cstName" name="custName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Customer Sec Name</label>
+                            <input type="text" class="form-control" id="custSecName" name="custSecName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4" id="custLastName">Customer Surname</label>
+                            <input type="text" class="form-control" id="cstSurName" name="custLastName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail4">Age</label>
+                            <input type="text" class="form-control" id="age" name="age">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary createTransaction" data-dismiss="modal" data-toggle="modal" data-target="#addMakeRezarvationModal">Make Rezarvation</button>
+                    <button type="button" class="btn btn-primary createTransaction" data-dismiss="modal" data-toggle="modal" data-target="#addBuyModalModal">Buy Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var receiptID = null;
+
+            $(".createTransaction").click(function () {
+
+                var categoryForm = $("#transactionForm").serialize()
+                console.log(categoryForm)
+
+                $.ajax({
+                    url: '@Url.Action("TransactionPost","Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: categoryForm,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    success: function (result) {
+                        receiptID = result;
+                    },
+                    error: function (hata) {
+
+                    }
+                });
+            })
+             //addIncrementCategory
+                $("#addIncrementCategory").click(function () {
+
+                    var categoryForm = $("#addCategoryForm").serialize() + "&receiptID=" + receiptID
+                    console.log(categoryForm)
+
+
+
+                    $.ajax({
+                        url: '@Url.Action("addCategoryPost","Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: categoryForm,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (result) {
+                            console.log(result)
+                        },
+                        error: function (hata) {
+
+                        }
+                    });
+                })
+
+
+            //getReceiptCategory
+            $("#getReceiptCategory").click(function () {
+
+                var data = { receiptID: receiptID }
+
+                var cstSurName =   $("#cstSurName").val();
+                var cstName =      $("#cstName").val();
+
+
+                    $.ajax({
+                        url: '@Url.Action("getReceiptCategory","Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: data,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (result) {
+                            $("#receiptNumber").html(receiptID)
+                            $("#receiptDate").html(result.priceDate)
+                            $("#receiptPrice").html(result.totalPrice)
+                            $("#receiptName").html(cstName + ' ' + cstSurName)
+                        },
+                        error: function (hata) {
+
+                        }
+                    });
+            })
+
+            //getReceiptProduct
+            $("#getReceiptProduct").click(function () {
+
+                var data = { receiptID: receiptID }
+
+                var cstSurName =   $("#cstSurName").val();
+                var cstName =      $("#cstName").val();
+
+
+                    $.ajax({
+                        url: '@Url.Action("getReceiptCategory","Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: data,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (result) {
+                            $("#receiptProductNumber").html(receiptID)
+                            $("#receiptProductDate").html(result.priceDate)
+                            $("#receiptProductPrice").html(result.totalPrice)
+                            $("#receiptProductName").html(cstName + ' ' + cstSurName)
+                        },
+                        error: function (hata) {
+
+                        }
+                    });
+                })
+
+                    //addIncrementProduct
+                $("#addIncrementProduct").click(function () {
+
+                    var productForm = $("#addProductForm").serialize() + "&receiptID=" + receiptID
+                    console.log(productForm)
+
+
+
+                    $.ajax({
+                        url: '@Url.Action("addProductPost","Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: productForm,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (result) {
+                            console.log(result)
+                        },
+                        error: function (hata) {
+
+                        }
+                    });
+
+
+        });
+    });
+    </script>
+</body>
+</html>
+
+
